@@ -7,6 +7,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 var itemArray = ["Wake up" , "Brush and Bath" , "Tea"];
+var workList = [];
 
 app.get("/", function(req,res)
 {
@@ -19,7 +20,7 @@ app.get("/", function(req,res)
     var day = today.toLocaleDateString("en-US",options);
 
     res.render("list" , {
-      kingOfDay : day,
+      listTitle : "It's "+day,
       listArray : itemArray
     });
 });
@@ -27,11 +28,38 @@ app.get("/", function(req,res)
 app.post("/", function(req,res)
 {
   var item = req.body.newItem;
-  itemArray.push(item);
 
-  res.redirect("/");
+  if(req.body.button == "Work")
+  {
+    workList.push(item);
+    res.redirect("/work");
+  }
+  else {
+    itemArray.push(item);
+    res.redirect("/");
+  }
 });
 
+
+app.get("/work" , function(req,res)
+{
+  res.render("list" , {
+    listTitle : "Work",
+    listArray : workList
+  });
+});
+
+// app.post("/work", function(req,res)
+// {
+//     var workItem = req.body.newItem;
+//     workList.push(workItem);
+//     res.redirect("/work");
+// });
+
+app.get("/about",function(req,res)
+{
+    res.render("about");
+});
 
 app.listen(3000,function()
 {
