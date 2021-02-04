@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TO DO LIST</title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+
+    <div class="box" , id="heading">
+      <h1>It's a <%= kingOfDay %></h1>
+    </div>
+
+    <div class="box">
+      <ul>
+        <%for(var i=0;i<listArray.length;i++){%>
+
+          <div class="item">
+            <input type="checkbox">
+            <p><%= listArray[i] %></p>
+          </div>
+
+        <%}%>
+      </ul>
+
+      <form class="item" action="/" method="post">
+
+        <input type="text" name="newItem" value="" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="button">+</button>
+
+      </form>
+
+
+    </div>
+
+
+
+  </body>
+</html>
